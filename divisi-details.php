@@ -47,7 +47,7 @@ if (isset($_GET['id'])) {
 <?php include 'navbar.php'; ?>
 
 <div class="page-header">
-    <h2>BIRO PR PMII RESTART</h2>
+    <h2>Divisi PALADA</h2>
     <P><?php echo $nama_devisi; ?></P>
 </div>
 
@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <div class="signle-pro-details">
-        <h6>Home/RESTART</h6>
+        <h6>Home/Palada</h6>
         <h4><?php echo $nama_devisi; ?></h4>
 
         <span><?php echo $deskripsi; ?></span>

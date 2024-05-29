@@ -1,6 +1,7 @@
+<?php include 'auth.php'; ?>
 <?php include 'navbar.php'; ?>
 <?php
-include 'include/config.php';
+include '../include/config.php';
 
 $query = "SELECT * FROM devisi";
 $result = mysqli_query($conn, $query);
@@ -15,19 +16,18 @@ $divisi = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <div class="baner">
-    <h1>PR PMII RESTART</h1>
-    <h2>PENGURUS RAYON PERGERAKAN MAHASISWA ISLAM INDONESIA</h2>
-    <H3>REVOLUSI SATUAN AREK RAYON TEKNIK</H3>
+    <h1>PALADA</h1>
+    <h2>Pencinta Alam UKRIDA</h2>
     <h3>Diresmikan pada tanggal 05 Januari 2011</h3>
 </div>
 
 <div class="divisi" id="dev-p1">
-    <h2>BIRO RESTART</h2>
-    <h3>Pembagian BIRO RESTART</h3>
+    <h2>BIRO PALADA</h2>
+    <h3>Pembagian Kegiatan PALADA</h3>
     <div class="pro-cont">
         <?php foreach ($divisi as $row) : ?>
             <div class="dev">
-                <img src="admin/img/devisi/<?php echo $row['gambar']; ?>">
+                <img src="../admin/img/devisi/<?php echo $row['gambar']; ?>">
                 <div class="des">
                     <span><?php echo $row['nama_devisi']; ?></span>
                     <h5><?php echo $row['deskripsi']; ?></h5>
@@ -38,8 +38,8 @@ $divisi = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </div>
 
 <div class="baner1" id="dev-p2">
-    <h2>HELLO SAHABAT/I</h2>
-    <h4>PR PMII RESTART</h4>
+    <h2>HELLO GENK!</h2>
+    <h4>PALADA</h4>
 </div>
 
 <?php include 'footer.php'; ?>

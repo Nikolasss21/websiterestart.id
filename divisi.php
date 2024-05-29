@@ -7,7 +7,7 @@ $xmlFile = 'data.xml';
 // Menginisialisasi objek SimpleXMLElement
 $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><divisions></divisions>');
 
-include 'include/config.php';
+include '../include/config.php';
 
 $query = "SELECT * FROM devisi";
 $result = mysqli_query($conn, $query);
@@ -32,7 +32,8 @@ $xml->asXML($xmlFile);
 ?>
 
 <div class="page-header">
-    <h2>BIRO PR PMII RESTART</h2>
+    <h2>Divisi PALADA</h2>
+    <P>Pembagian Kegiatan PALADA</P>
 </div>
 
 <div class="divisi" id="dev-p1">
@@ -47,7 +48,7 @@ $xml->asXML($xmlFile);
             $divisi_id = (string)$division->id; // Menambahkan definisi $divisi_id
 
             echo '<div class="dev" onclick="window.location.href=\'divisi-details.php?id=' . $divisi_id . '\';">';
-            echo '<img src="admin/img/devisi/' . $gambar . '">';
+            echo '<img src="../admin/img/devisi/' . $gambar . '">';
             echo '<div class="des">';
             echo '<span>' . $nama_divisi . '</span>';
             echo '<h5>' . $deskripsi . '</h5>';
@@ -60,8 +61,8 @@ $xml->asXML($xmlFile);
 
 
 <div class="baner1" id="dev-p2">
-    <h2>HELLO SAHABAT/I</h2>
-    <h4>PR PMII RESTART</h4>
+    <h2>HELLO GENK!</h2>
+    <h4>PALADA</h4>
 </div>
 
 <?php

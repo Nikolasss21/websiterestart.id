@@ -1,26 +1,11 @@
-<?php
-session_start();
-
-// Periksa apakah pengguna sudah login
-if (isset($_SESSION['user_id'])) {
-    // Jika pengguna telah login, redirect ke halaman user
-    header("Location: user/index.php");
-    exit();
-}
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RESTART</title>
-    <link rel="stylesheet" href="style.css">
-
+    <title>PALADA</title>
+    <link rel="stylesheet" href="../style.css">
     <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -31,12 +16,12 @@ if (isset($_SESSION['user_id'])) {
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Secular+One&display=swap" rel="stylesheet">
-<link rel="icon" href="images/Logo Restart.jpg">
+<link rel="icon" href="logo.png">
 </head>
 
 <body>
 <section id="header">
-        <a href="index.php"><img src="images/RESTART.PNG" class="logo" ></a>
+        <a href="index.php"><img src="logo.png" class="logo" ></a>
     
         <div>
          
@@ -48,7 +33,9 @@ if (isset($_SESSION['user_id'])) {
             <li><a href="blog.php">Blog</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <li><a href="login.php">Login</a></li>
+            <li><a href="daftar.php">Daftar Calon Anggota</a></li>
+            <li><a href="information.php">Information</a></li>
+            <li><a href="../keluar.php">Keluar</a></li>
                 <a href="#" id="close"> <i class="far fa-times"></i></a>
             </ul>
         </div>

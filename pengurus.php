@@ -1,5 +1,5 @@
 <?php
-require 'include/config.php';
+require '../include/config.php';
 
 $query = "SELECT * FROM pengurus";
 $result = mysqli_query($conn, $query);
@@ -20,8 +20,8 @@ if (!$result) {
 </style>
 
 <div class="page-header">
-    <h2>Pengurus PR PMII RESTART</h2>
-    <p>Badan Pengurus Harian RESTART</p>
+    <h2>Pengurus PALADA</h2>
+    <p>Badan Pengurus PALADA</p>
 </div>
 
 <div class="divisi" id="dev-p1">
@@ -31,7 +31,7 @@ if (!$result) {
         while ($row = mysqli_fetch_assoc($result)) {
             $nama_divisi = $row['nama'];
             $deskripsi = $row ['angkatan'];
-            $gambar = 'admin/' . $row['foto']; // Tambahkan 'admin/' sebelum nama gambar
+            $gambar = '../admin/' . $row['foto']; // Tambahkan 'admin/' sebelum nama gambar
             $divisi_id = $row['id'];
 
             echo '<div class="dev">';
@@ -47,8 +47,8 @@ if (!$result) {
 </div>
 
 <div class="baner1" id="dev-p2">
-    <h2>HELLO SAHABAT/I</h2>
-    <h4>PR PMII RESTART</h4>
+    <h2>HELLO GENK!</h2>
+    <h4>PALADA</h4>
 </div>
 
 <?php include('footer.php'); ?>
