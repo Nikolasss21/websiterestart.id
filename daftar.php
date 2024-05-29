@@ -1,140 +1,124 @@
 <?php
-// daftar.php (halaman pendaftaran mahasiswa)
-require 'include/config.php'; // Mengimpor konfigurasi dari file config.php
+session_start(); // Mulai session
 
-// Periksa apakah formulir pendaftaran telah disubmit
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    $nama = $_POST["nama"];
-    $email = $_POST["email"];
-    $no_telpon = $_POST["no_telpon"];
-    $jurusan = $_POST["jurusan"];
+require '../include/config.php'; // Include the file that contains database connection code
 
-    // Cek apakah username sudah digunakan
-    $query = "SELECT * FROM login WHERE username = '$username'";
-    $result = mysqli_query($conn, $query);
+// Periksa apakah pengguna sudah login
+if (!isset($_SESSION['user_id'])) {
+    // Jika pengguna belum login, redirect ke halaman login
+    header("Location: ../login.php");
+    exit();
+}
 
-    if (mysqli_num_rows($result) == 0) {
-        // Hash password menggunakan password_hash() dengan algoritma bcrypt
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+$queryDevisi = "SELECT * FROM devisi";
+$resultDevisi = mysqli_query($conn, $queryDevisi);
 
-        // Tambahkan data ke tabel login
-        $insertLoginQuery = "INSERT INTO login (username, password, level) VALUES ('$username', '$hashedPassword', 'mahasiswa')";
-        mysqli_query($conn, $insertLoginQuery);
+// Periksa apakah form telah disubmit
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Tangkap data dari form
+    $nama = $_POST['nama'];
+    $nim = $_POST['nim'];
+    $jurusan = $_POST['jurusan'];
+    $angkatan = $_POST['angkatan'];
+    $id_devisi = $_POST['id_devisi'];
+    $keterangan = $_POST['keterangan'];
 
-        // Dapatkan ID login terakhir yang ditambahkan
-        $loginId = mysqli_insert_id($conn);
+    // Dapatkan id_mahasiswa dari session
+    $id_mahasiswa = $_SESSION['user_id'];
 
-        // Tambahkan data ke tabel mahasiswa
-        $insertMahasiswaQuery = "INSERT INTO mahasiswa (id_login, nama, email, no_telpon, jurusan) VALUES ('$loginId', '$nama', '$email', '$no_telpon', '$jurusan')";
-        mysqli_query($conn, $insertMahasiswaQuery);
+    // Periksa apakah ada file yang diunggah
+    if(isset($_FILES['foto'])){
+        $file_name = $_FILES['foto']['name'];
+        $file_size = $_FILES['foto']['size'];
+        $file_tmp = $_FILES['foto']['tmp_name'];
+        $file_type = $_FILES['foto']['type'];
+        $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-        // Redirect ke halaman login setelah pendaftaran berhasil
-        header("Location: login.php");
-        exit();
+        $extensions = array("jpeg", "jpg", "png");
+
+        if (in_array($file_ext, $extensions) === false) {
+            $error_message = "Ekstensi file yang diunggah tidak diperbolehkan. Harap unggah file dengan ekstensi JPEG, JPG, atau PNG.";
+        }
+
+        if ($file_size > 2097152) {
+            $error_message = "Ukuran file tidak boleh lebih dari 2MB";
+        }
+
+        if (empty($error_message) === true) {
+            // Pindahkan file yang diunggah ke direktori yang ditentukan
+            move_uploaded_file($file_tmp, "uploads/" . $file_name);
+
+            // Query untuk memasukkan data ke dalam tabel
+            $query = "INSERT INTO regis_anggota_organisasi (id_mahasiswa, nama, nim, jurusan, angkatan, id_devisi, foto, keterangan) VALUES ('$id_mahasiswa', '$nama', '$nim', '$jurusan', '$angkatan', '$id_devisi', '$file_name', '$keterangan')";
+
+            // Eksekusi query
+            if (mysqli_query($conn, $query)) {
+                $success_message = "Anggota berhasil ditambahkan!";
+            } else {
+                $error_message = "Terjadi kesalahan: " . mysqli_error($conn);
+            }
+        }
     } else {
-        echo "Username sudah digunakan.";
+        $error_message = "Tidak ada file yang diunggah.";
     }
 }
 ?>
 
+<?php include 'navbar.php'; ?>
 
+<div class="container">
+    <h1>Daftar Anggota Organisasi</h1>
 
-<style>
-    /* Style untuk container */
-.login-container, .register-container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-}
+    <?php if (isset($success_message)) : ?>
+    <div class="alert alert-success" role="alert"><?php echo $success_message; ?></div>
+<?php endif; ?>
 
-/* Style untuk judul */
-h2 {
-    margin-top: 0;
-}
+<?php if (isset($error_message)) : ?>
+    <div class="alert alert-danger" role="alert"><?php echo $error_message; ?></div>
+<?php endif; ?>
 
-/* Style untuk form */
-.form-group {
-    margin-bottom: 10px;
-    text-align: left;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-input[type="submit"] {
-    width: 100%;
-    padding: 8px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-/* Style untuk tautan */
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-</style>
-
-<!-- Formulir pendaftaran HTML -->
-<div class="register-container">
-    <h2>Daftar Akun Mahasiswa</h2>
-    <form method="POST" action="daftar.php">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <label for="nama">Nama:</label>
-            <input type="text" id="nama" name="nama" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="no_telpon">No. Telpon:</label>
-            <input type="text" id="no_telpon" name="no_telpon" required>
-        </div>
-        <div class="form-group">
-            <label for="jurusan">Jurusan:</label>
-            <input type="text" id="jurusan" name="jurusan" required>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Daftar">
-        </div>
-    </form>
-    <p>Udah punya akun? <a href="index.php">Login di sini</a></p>
+<form method="POST" action="" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="nama" class="form-label">Nama</label>
+        <input type="text" class="form-control" id="nama" name="nama" required>
+    </div>
+    <div class="mb-3">
+        <label for="nim" class="form-label">NIM</label>
+        <input type="text" class="form-control" id="nim" name="nim" required>
+    </div>
+    <div class="mb-3">
+        <label for="jurusan" class="form-label">Jurusan</label>
+        <input type="text" class="form-control" id="jurusan" name="jurusan" required>
+    </div>
+    <div class="mb-3">
+        <label for="angkatan" class="form-label">Angkatan</label>
+        <input type="text" class="form-control" id="angkatan" name="angkatan" required>
+    </div>
+    <div class="mb-3">
+        <label for="id_devisi" class="form-label">Devisi</label>
+        <select class="form-control" id="id_devisi" name="id_devisi" required>
+            <?php while ($rowDevisi = mysqli_fetch_assoc($resultDevisi)) : ?>
+                <option value="<?php echo $rowDevisi['id']; ?>"><?php echo $rowDevisi['nama_devisi']; ?></option>
+            <?php endwhile; ?>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="foto" class="form-label">Foto</label>
+        <input type="file" class="form-control" id="foto" name="foto" required>
+    </div>
+    <div class="mb-3">
+        <label for="keterangan" class="form-label">Alasan Masuk Palada</label>
+        <textarea class="form-control" id="keterangan" name="keterangan" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Kirim</button>
+</form>
 </div>
+<br>
+<br>
+<br>
+<br>
+
+<?php include 'footer.php'; ?>
+<script src="scrip.js"></script>
+</body>
+</html>

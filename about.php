@@ -8,16 +8,14 @@
 
 <div class="prodetails" id="section-p1">
     <div class="single-pro-images">
-        <img src="images/LOGOORESTART.PNG" width="100%" id="MainImg">
+        <img src="logo.png" width="100%" id="MainImg">
     </div>
 
 
     <div class="signle-pro-details">
-        <h4>SEJARAH PR PMII RESTART</h4>
+        <h4>Pencinta Alam UKRIDA (PALADA)</h4>
 
-        <span>PR. PMII RESTART UNISLA Veteran merupakan organisasi PMII Tingkat rayon yang berada di bawah naungan PK. PMII UNISLA Veteran Lamongan. Restart menaungi Fakultas Teknik yang terdiri dari prodi informatika, sipil dan elektro selain itu Restart juga menaungi fakultas kesehatan yang terdiri dari prodi kesehatan lingkungan.
-
-Sejarah awal berdirinya RESTART ini dilatarbelakangi keinginan kuat Sahabat A.Sriadi (Alm), zainal abidin dan sahabat sahabat yang lainya untuk mendirikan PMII di fakultas Teknik karena pada saat itu fakultas Teknik didominasi oleh HMI. PR PMII RESTART UNISLA Veteran berdiri pada tanggal 05 Januari 2011. Di balik itu semua juga ada sejarah Panjang dimana pada angkatan pertama yang mengikuti PMII di fakultas Teknik adalah sahabat A.Sriadi (Alm) yang sudah berproses di tingkat pk pmii unisla veteran</span>
+        <span>Gagasan untk mendirikan Pencinta Alam UKRIDA sebenarnya dicetuskan oleh sekelompok mahasiswa yang sebagian besar adalah pengurus Senat Mahasiswa Fakultas Ekonomi periode 1990/1991 yang pada waktu itu diketuaioleh saudara Yusak Sudarso (W.608.BR) dan mendapat dukungan penuh dari Pembantu Dekan III F.E an Pembantu Rektor III UKRIDA. Gagasan ini kemudian terlaksana dengan diadakannya DIKLATSAR I pada tanggal 20-26 Januari 1991, kemudia diresmikan berdiri pada tanggal 26 Januari1991 bertepatan dengan pelantikan angkatan pertama PALADA. Sejak pertama berdiri hingga saat ini, mungkin baru sedikit yang telah PALADA sumbangkan kepada masyarakat yang dirasakan langsung . PALADA berusaha merintis dan mengembangkan kegiatan yang menyangkut alam bebas juga pertolongan yang lebih dikenal dengan SAR (Search and Rescue). PALADA juga telah berusaha mengembangkan berbagai pengetahuandan kegiatan-kegiatan hidup di alam bebas seperti : Pendakian gunung hutan, Pendakian tebing terjal, SAR dan lain-lain</span>
     </div>
 </div>
 

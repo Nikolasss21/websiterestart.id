@@ -4,12 +4,12 @@
 
 
 <div class="page-header">
-    <h2>KEGIATAN-KEGIATAN PALADA</h2>
+    <h2>KEGIATAN-KEGIATAN PR PMII RESTART</h2>
     <P></P>
 </div>
 
 <?php
-require 'include/config.php';
+require '../include/config.php';
 
 // Fetch gallery activities from the database
 $query = "SELECT * FROM gallery";
@@ -28,7 +28,7 @@ if (!$result) {
     <div class="pro-cont">
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
             <div class="dev" onclick="window.location.href='activity.php?id=<?php echo $row['id']; ?>';">
-                <img src="admin/img/activity/<?php echo $row['foto']; ?>">
+                <img src="../admin/img/activity/<?php echo $row['foto']; ?>">
                 <div class="des">
                     <span><?php echo $row['deskripsi']; ?></span>
                     <h5></h5>
